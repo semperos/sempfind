@@ -1,0 +1,16 @@
+[package]
+name = "sempfind"
+version = "0.1.0"
+license = "MIT OR Apache-2.0"
+authors = ["Daniel Gregoire <daniel.l.gregoire@gmail.com>"]
+
+[lib]
+name="sempfind"
+path="src/lib.rs"
+
+[[bin]]
+name="sempfind"
+path="src/main.rs"
+
+[dependencies]
+clap = "~2.26"
