@@ -13,12 +13,12 @@ enum FindType {
     Directory,
 }
 
-fn find_file_or_directory(find_type: FindType, name_portion: &str) -> Result<(), FindError> {
+fn find_file_or_directory(find_type: &FindType, name_portion: &str) -> Result<(), FindError> {
     let mut cmd = Command::new("find");
     let s = format!("*{}*", name_portion);
     cmd.arg(".")
         .arg("-type")
-        .arg(match find_type {
+        .arg(match *find_type {
             FindType::File => "f",
             FindType::Directory => "d",
         })
@@ -33,11 +33,11 @@ fn find_file_or_directory(find_type: FindType, name_portion: &str) -> Result<(),
 }
 
 pub fn find_file(name_portion: &str) -> Result<(), FindError> {
-    find_file_or_directory(FindType::File, name_portion)
+    find_file_or_directory(&FindType::File, name_portion)
 }
 
 pub fn find_directory(name_portion: &str) -> Result<(), FindError> {
-    find_file_or_directory(FindType::Directory, name_portion)
+    find_file_or_directory(&FindType::Directory, name_portion)
 }
 
 #[cfg(test)]
